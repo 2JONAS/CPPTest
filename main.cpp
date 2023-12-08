@@ -4,6 +4,7 @@
 #include "include/AppConfig.h"
 #include <httplib.h>
 #include <yaml-cpp/yaml.h>
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 void logInit(){
 
