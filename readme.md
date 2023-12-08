@@ -3,13 +3,17 @@
 ```bash
 # 
 sudo apt-get update
-sudo apt-get install g++
-sudo apt-get install make
+sudo apt-get install -y g++
+sudo apt-get install -y make
 # 添加Cmake的官方仓库
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa  # 添加PPA仓库
-sudo apt-get update
-sudo apt-get install cmake
+#sudo apt-get install -y software-properties-common
+#sudo add-apt-repository ppa:deadsnakes/ppa  # 添加PPA仓库
+#sudo apt-get update
+#sudo apt-get install -y cmake
+wget https://github.com/Kitware/CMake/releases/download/v3.26.6/cmake-3.26.6-linux-x86_64.sh
+chmod +x cmake-3.26.6-linux-x86_64.sh
+sudo ./cmake-3.26.6-linux-x86_64.sh --skip-license --prefix=/usr
+
 cmake --version
 #sudo apt-get install git
 sudo apt-get install gdb
@@ -17,7 +21,8 @@ sudo apt-get install gdb
 #sudo apt-get install libboost-all-dev
 sudo apt-get install ufw
 sudo ufw enable
-sudo ufw allow 8080
+sudo ufw allow 22
+sudo ufw allow 8082
 
 ```
 ## 调试

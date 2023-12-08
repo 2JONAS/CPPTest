@@ -17,7 +17,7 @@ void listenServer(){
     });
 
     // 启动服务器，监听端口 8080
-    svr.listen("0.0.0.0", 8080);
+    svr.listen("0.0.0.0", 8082);
 }
 
 int main() {
