@@ -38,11 +38,13 @@ void listenServer(){
 }
 
 int main() {
-    logInit();
     loadConfig();
-    listenServer();
+    logInit();
+    spdlog::info("log init");
+    std::thread serverThread(listenServer);
     std::cout << "Hello, World!" << std::endl;
     std::cout << "Press [Enter] key to continue...";
     std::cin.get();
+    serverThread.join();
     return 0;
 }
