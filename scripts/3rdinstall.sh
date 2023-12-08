@@ -9,3 +9,9 @@ git clone https://github.com/yhirose/cpp-httplib.git
 cd cpp-httplib && mkdir build && cd build
 cmake .. && make -j
 sudo make install # make install是为了方便直接findpackage
+
+
+git clone https://github.com/jbeder/yaml-cpp.git
+cd yaml-cpp && mkdir build && cd build
+cmake .. && make -j
+sudo make install

@@ -34,6 +34,7 @@
 
 logs
 .cmake
+cmake-build*
 *cbp
 CMakeLists.txt.user
 CMakeCache.txt

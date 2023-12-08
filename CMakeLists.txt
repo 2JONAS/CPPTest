@@ -9,13 +9,32 @@ set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 #include_directories(${SPDLOG_DIR}/include)
 #include_directories(${HTTP_DIR})
 
+set(CMAKE_PREFIX_PATH "/usr/local/include/")
 find_package(spdlog REQUIRED)
 find_package(httplib REQUIRED)
+find_package(yaml-cpp REQUIRED)
+
+
+add_custom_target(remove_static_folder ALL
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/static
+        COMMENT "Removing static folder from build directory"
+)
+file(COPY static DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # 源文件
-add_executable(cpp6 main.cpp)
+# 获取源文件列表
+file(GLOB SOURCES src/*.cpp)
+# 获取头文件列表
+file(GLOB HEADERS include/*.h)
+#add_executable(cpp6 main.cpp
+#        ${SOURCES} ${HEADERS})
+add_executable(cpp6 main.cpp
+        src/AppConfig.cpp
+        include/AppConfig.h)
+
 
 # 链接库
 #target_link_libraries(cpp6 PRIVATE ${SPDLOG_DIR}/build/libspdlog.a)
 target_link_libraries(cpp6 PRIVATE spdlog::spdlog)
 target_link_libraries(cpp6 PRIVATE httplib::httplib)  # 这个库是make install的方式安装的
+target_link_libraries(cpp6 PRIVATE yaml-cpp::yaml-cpp)
