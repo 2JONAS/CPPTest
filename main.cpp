@@ -6,9 +6,16 @@
 #include <yaml-cpp/yaml.h>
 
 void logInit(){
-    auto logger = spdlog::daily_logger_mt("daily_logger", "logs/daily.txt", 2, 30);
-    spdlog::set_default_logger(logger);
-    spdlog::set_level(spdlog::level::info);
+
+//    auto logger = spdlog::daily_logger_mt("daily_logger", "logs/daily.txt", 2, 30);
+
+    auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+    auto file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>("logs/daily.txt", 2, 30);
+    spdlog::flush_every(std::chrono::seconds(1));
+    spdlog::logger logger("multi_sink", {console_sink, file_sink});
+    logger.set_level(spdlog::level::debug);
+
+    spdlog::set_default_logger(std::make_shared<spdlog::logger>(logger));
     spdlog::info("log init");
 }
 void loadConfig() {
